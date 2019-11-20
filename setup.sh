@@ -12,3 +12,9 @@ LOCATION="$(gcloud container clusters list --format='value(location)')"
 
 # Fetch a valid kubeconfig
 gcloud container clusters get-credentials --zone="${LOCATION}" "gke-${USER}"
+
+if ! [ -x "$(command -v nmap)" ]; then
+  sudo apt update
+  sudo apt install nmap
+  exit 1
+fi
