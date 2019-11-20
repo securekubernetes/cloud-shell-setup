@@ -14,7 +14,7 @@ LOCATION="$(gcloud container clusters list --format='value(location)')"
 gcloud container clusters get-credentials --zone="${LOCATION}" "gke-${USER}"
 
 if ! [ -x "$(command -v nmap)" ]; then
-  sudo apt update
-  sudo apt install nmap
+  sudo DEBIAN_FRONTEND=noninteractive apt-get update -q
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install nmap -y -q
   exit 1
 fi
