@@ -12,6 +12,3 @@ LOCATION="$(gcloud container clusters list --format='value(location)')"
 
 # Fetch a valid kubeconfig
 gcloud container clusters get-credentials --zone="${LOCATION}" "gke-${USER}"
-
-# kubectl bash completion
-source <(kubectl completion bash)
