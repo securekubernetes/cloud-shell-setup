@@ -1,0 +1,389 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: tiller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: kube-system
+---
+apiVersion: v1
+data:
+  release: H4sIAAAAAAAC/6xXQW8bxRdXGkX//KccKiOB2l4eGyq1Bo9jgVBlqYeSVCIqpFFdBSGEqtndt/bUszPTmVknJjFHJA7ckbhwA8ERiQ+BxFfhigQXNLNre53EaZriw3r2zZv3fvN7b96bJf93SmLaQjFsPCQ311eiN3eVG3DZB6fAIsIADVJKSeO19Z//+e7PtWt///X1Dys3Ft6a13akdUwISFSuBTq88dt10iFX4jRa26Qdutm8eR8+QpFDMmDGQaYMPCxiNBId2sdXRp1nqx262aDkdYe5Fsyhbe8+evKgR92hayzF9NNV8sZ8wdMBCo3GUqdF49urR0ftJox43gWLDjIu0I013ssL61gywC4025MJ8VrkwaFmMgU3QJAsR1BZGAewlFR6LUgx4xIhillaTnnlCFrzaVYIB3QrTO56S3SfiQJt0Hw0QmN4inAMzhQygQ/eC0Oe94os44cQtebGUKZhXALcMsgcApv5yAohxvC8YIJnHFNgWgfolHyKpfWg77wPj9VCjAkrLIJVOdbILzeccRSpBWYQBM+5w9Rz7Qbcwu14HMjY3u15XR8GqzG5Q8lOBgYFMluxlijpGJe2CnKQcQcHXAiIEQrrcVpgAXyFdjm3XmmRX57N6JxOziid6ixVuBDnws4tvR3wd+9dPKw1nDMqSiv0cclTuXiGdUH60gC14dJlEN2yrVs2OmGt9PsyibZsvJCAtcj6AzNCY7mSPqohulWqlFqCxSjOi3B4Rkv3U6e7HO9X7o7BoBYsQYjeiSB6Gl3mRKk8V7IEac8BWSqUVpjWdDg7OZSrtmeiC0dHwGUiivR0baAwmZABipzaQTtMLFGvyAj6p/1wX19lUvpajHTtcJQs3dd6StSZtqqglaZOLTmG54VyM7OetDOt5EyyPqateLyIqYdmxJOF9Z66xo/r5Pq8VKeohRrnKB0ds1w0vllnmu9PgTGtbXvUIUMu0y5sz3RJjo6lzLEuATiH+nnpCHSWulYzz5/fRcuOrcOcQBX+LjnTzDT0FI6ByxSlg/e9PV/+PAKfhDxhtiSgqgiVcEsV0pXOLQpMnDJ+CUDOXDL4uHIL4XfZtFq2+vxkAZiGoQJU49T/xAK2V0V3GXwAU4b9ryqlaGqYWvPo18tEzSsAz1kfuxDVYhNEPkLKcqfMGCaT7qlpx/owmUQnLe0VQuwpwZPxQrjLNXo2Ocfgs/+Au8G8V6gUe1UuzNXq0vkG/WKnPmO5CNknq/S7u2i+OpxnemNZxiV3NUBTycW9vMiHUwINc1xJO3dTE17KU/THCvl9pX6MutAhpAxneeqq8HUhNiztI1qWM9mOU5/brN+FUGMcAdC1oO1ku8rtGbS+kJB64+5CFKcROXllqMTEoFWFSdCf8wkhCwELkvqO4fMvCJkx7aebv6ySq9S3AN6XymDj+9UN2GPOoZHW37JKMRwMUEJccJH6K5ZmyZD10VKyAU/8NcwWWivjLNgBCgF9oeKylnDZf9ffw5jjIwTN3KAmZzIlGyCxH+DBbW0w44eYlnF86w6FR1KMQcmw0kMCjQYEl0gJ3e497TllkGxA1S73t3qQcmMJ7XPXDs8SPqHxl6YdnlPBoN/2j+mrHcn23FDMkmGhw63ckia1B5o0acyGpEldrknzK7IB+8xwVVjY2X5gCdVGPcPEEcpTZO1Sz6hnhI5solJsE7IB2yoZoiGfsCF6y6R8D8MDjANztK88pVwINMSFv5aJWRL6ECHRGln1Qft1jbRaLbIBvRD7LsRpe2n7IpdsXiFjX9ibzivCwQLAiQtGnLbCVxd5Uf2dffwt0ZxdFaIO3YyWKNVvAhWvpztk51UaYbXLi+/lv+lwM7cvQ+JFW1fN+LxXnahn3bKQnduL6mXt7sqH/6u+Vv4NAAD//0lSXXnZDwAA
+kind: ConfigMap
+metadata:
+  labels:
+    NAME: toned-elk
+    OWNER: TILLER
+    STATUS: DEPLOYED
+    VERSION: "1"
+  name: toned-elk.v1
+  namespace: kube-system
+  resourceVersion: "305145"
+  selfLink: /api/v1/namespaces/kube-system/configmaps/toned-elk.v1
+  uid: bbef1d30-02a7-11ea-93a1-42010a800197
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: default-sa-namespace-admin
+  namespace: dev
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: admin
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: User
+  name: system:serviceaccount:dev:default
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dashboard
+  labels:
+    app: dashboard
+  namespace: dev
+spec:
+  type: NodePort
+  externalTrafficPolicy: Local
+  ports:
+  - port: 8080
+    targetPort: http
+    protocol: TCP
+    nodePort: 31336
+    name: dashboard
+  selector:
+    app: dashboard
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashboard
+  labels:
+    app: dashboard
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dashboard
+  template:
+    metadata:
+      labels:
+        app: dashboard
+    spec:
+      serviceAccountName: default
+      containers:
+        - name: dashboard
+          image: "securekubernetes/example-dashboard"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: backend
+              containerPort: 3000
+              protocol: TCP
+          env:
+            - name: DEPLOYTYPE
+              value: DEV
+        - name: authproxy
+          image: "securekubernetes/auth-proxy"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          env:
+            - name: UPSTREAM_IP
+              value: "localhost"
+            - name: UPSTREAM_PORT
+              value: "3000"
+            - name: AUTH_DIR
+              value: webshell
+            - name: WEBUSERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: dashboard-secret
+                  key: username
+            - name: WEBPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dashboard-secret
+                  key: password
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: prd
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: default-sa-namespace-admin
+  namespace: prd
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: admin
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: User
+  name: system:serviceaccount:prd:default
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dashboard
+  labels:
+    app: dashboard
+  namespace: prd
+spec:
+  type: NodePort
+  externalTrafficPolicy: Local
+  ports:
+  - port: 8080
+    targetPort: http
+    protocol: TCP
+    nodePort: 31337
+    name: dashboard
+  selector:
+    app: dashboard
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashboard
+  labels:
+    app: dashboard
+  namespace: prd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dashboard
+  template:
+    metadata:
+      labels:
+        app: dashboard
+    spec:
+      serviceAccountName: default
+      containers:
+        - name: dashboard
+          image: "securekubernetes/example-dashboard"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: backend
+              containerPort: 3000
+              protocol: TCP
+          env:
+            - name: DEPLOYTYPE
+              value: PRD
+        - name: authproxy
+          image: "securekubernetes/auth-proxy"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          env:
+            - name: UPSTREAM_IP
+              value: "localhost"
+            - name: UPSTREAM_PORT
+              value: "3000"
+            - name: AUTH_DIR
+              value: webshell
+            - name: WEBUSERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: dashboard-secret
+                  key: username
+            - name: WEBPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dashboard-secret
+                  key: password
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: db
+  name: db
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - image: redis:alpine
+        name: db
+        ports:
+        - containerPort: 6379
+          name: db
+        volumeMounts:
+        - mountPath: /data
+          name: db-data
+      volumes:
+      - name: db-data
+        emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: db
+  name: redis
+  namespace: dev
+spec:
+  type: ClusterIP
+  ports:
+  - name: "db-service"
+    port: 6379
+    targetPort: 6379
+  selector:
+    app: db
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: app
+  name: app
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+      - image: dockersamples/examplevotingapp_vote:before
+        name: app
+        ports:
+        - containerPort: 80
+          name: app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: app
+  name: app
+  namespace: dev
+spec:
+  type: NodePort
+  externalTrafficPolicy: Local
+  ports:
+  - name: "app-service"
+    port: 5000
+    targetPort: 80
+    nodePort: 31379
+  selector:
+    app: app
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: db
+  name: db
+  namespace: prd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - image: redis:alpine
+        name: db
+        ports:
+        - containerPort: 6379
+          name: db
+        volumeMounts:
+        - mountPath: /data
+          name: db-data
+      volumes:
+      - name: db-data
+        emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: db
+  name: redis
+  namespace: prd
+spec:
+  type: ClusterIP
+  ports:
+  - name: "db-service"
+    port: 6379
+    targetPort: 6379
+  selector:
+    app: db
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: app
+  name: app
+  namespace: prd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+      - image: dockersamples/examplevotingapp_vote:before
+        name: app
+        ports:
+        - containerPort: 80
+          name: app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: app
+  name: app
+  namespace: prd
+spec:
+  type: NodePort
+  externalTrafficPolicy: Local
+  ports:
+  - name: "app-service"
+    port: 5000
+    targetPort: 80
+    nodePort: 31380
+  selector:
+    app: app
