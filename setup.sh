@@ -38,7 +38,7 @@ gcloud projects create "${GOOGLE_PROJECT_ID}"
 gcloud config set project "${GOOGLE_PROJECT_ID}"
 
 # Enable billing and containers with the first billing account
-BILLING_ACCOUNT=$(gcloud beta billing accounts list --format json | jq -r '.[0].name')
+BILLING_ACCOUNT=$(gcloud beta billing accounts list --format json | jq -r 'map(select(.open == true)) | .[0].name')
 gcloud beta billing projects link "${GOOGLE_PROJECT_ID}" --billing-account "${BILLING_ACCOUNT#billingAccounts/}"
 gcloud services enable container.googleapis.com --project "${GOOGLE_PROJECT_ID}"
 
