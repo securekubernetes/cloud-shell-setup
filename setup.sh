@@ -3,7 +3,7 @@
 ########################################
 # Data Gathering
 
-DEVSHELL_DEFAULT_PROJECT_ID="sk8s-$(echo "${USER}" | sed 's/[^a-z0-9-]//g')"
+DEVSHELL_DEFAULT_PROJECT_ID="sk8s-$(echo "${USER}" | sed 's/[^a-z0-9-]//g')-${RANDOM}"
 read -rp "Project ID [${DEVSHELL_DEFAULT_PROJECT_ID}]: " DEVSHELL_PROJECT_ID
 if [ -z "${DEVSHELL_PROJECT_ID}" ]; then
 	DEVSHELL_PROJECT_ID="${DEVSHELL_DEFAULT_PROJECT_ID}"
